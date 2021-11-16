@@ -2,51 +2,41 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Validator;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+// use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
-    protected $table = 'users';
-    protected $fillable = [
-        'name',
-        'username',
-        'email',
-        'phone',
-        'role',
-        'password',
-        'image',
+    use HasFactory, Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $guarded = [
+        'id',
     ];
-    
-    public static function validate($validate)
-    {
-        $rule = [
-            'name' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'role' => 'required',
-            'password' => 'required',
-        ];
-        if ($validate['id']) {
-            $rule['username'] = 'required|unique:App\Models\User,username,'.$validate['id'];
-        }
-        $validator = Validator::make($validate, $rule);
-        if ($validator->fails()) {
-            $errors =  $validator->errors()->all();
-            $res = array(
-                'status' => false,
-                'error' => $errors,
-                'msg' => 'Error on Validation'
-            );
-        } else {
-            $res = array(
-                'status' => true,
-                'msg' => 'Validation Ok'
-            );
-        }
-        return $res;
-    }
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

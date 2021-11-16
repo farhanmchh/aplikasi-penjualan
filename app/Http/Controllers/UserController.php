@@ -35,12 +35,14 @@ class UserController extends Controller
             $dataUpdate->username = $dataForm['username'];
             $dataUpdate->email = $dataForm['email'];
             $dataUpdate->phone = $dataForm['phone'];
-            $dataUpdate->password = $dataForm['password'];
+            $dataUpdate->password = bcrypt($dataForm['password']);
             $dataUpdate->role = $dataForm['role'];
             $dataUpdate->image = $dataForm['image'];
+
             $dataUpdate->save();
             $doSave = true;
         } else {
+            $dataForm['password'] = bcrypt($dataForm['password']);
             $doSave = User::create($dataForm);
         }
         if ($doSave) {
