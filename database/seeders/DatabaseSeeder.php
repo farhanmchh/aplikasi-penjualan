@@ -6,15 +6,28 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-    }
+  /**
+   * Seed the application's database.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    User::create([
+      'username' => 'Admin',
+      'email' => 'admin@gmail.com',
+      'password' => bcrypt('katalog001'),
+      'role' => 'admin'
+    ]);
+    User::create([
+      'username' => 'Farhanmch',
+      'email' => 'farhan@gmail.com',
+      'password' => bcrypt('farhan'),
+      'role' => 'user'
+    ]);
+  }
 }
