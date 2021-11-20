@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -97,9 +98,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category=Category::find($id);
+        $check_product=Product::where('category_id', $id)->count();
 
-        $category->delete();
-        return back();
+        if(!$check_product){
+            $category=Category::find($id);
+    
+            $category->delete();
+            return back();
+        }else{
+            return back();
+        }
     }
 }
