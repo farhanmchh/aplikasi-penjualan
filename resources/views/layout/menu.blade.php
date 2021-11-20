@@ -25,7 +25,7 @@
       <li class="menu-item {{ Request::is('product*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
         <a href="/product" class="menu-link">
           <span class="svg-icon menu-icon">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-item"></i>
           </span>
           <span class="menu-text">Product</span>
         </a>
