@@ -50,7 +50,7 @@ class AuthController extends Controller
       // return response()->json('berhasil login');
       $request->session()->regenerate();
 
-      return redirect('/dashboard');
+      return redirect('/product');
     }
 
     return back()->with('error', 'Login error');

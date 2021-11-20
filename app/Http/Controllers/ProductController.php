@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,8 @@ class ProductController extends Controller
     public function index()
     {
         return view('product.index', [
-            'title' => 'Product'
+            'title' => 'Product', 
+            'products'=> Product::all()
           ]);
     }
 
@@ -26,7 +28,14 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role == 'admin') {
+            return view('product.create', [
+                'title' => 'Product',
+                'categories'=>Category::orderBy('name', 'asc')->get()
+            ]);
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -37,7 +46,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product_data = $request->validate([
+            'name'=>['required'],
+            'price'=>['required'],
+            'category_id'=>['required'],
+            'description'=>['required'],
+        ]);
+        Product::create($product_data);
+        return redirect('/product'); 
     }
 
     /**
@@ -48,7 +64,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('product.show', [
+            'title' => 'Product',
+            'product' => Product::where('id', $id)->first(),
+        ]); 
     }
 
     /**
@@ -59,7 +78,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (auth()->user()->role == 'admin') {
+            return view('product.edit', [
+                'title' => 'Product',
+                'product' => Product::where('id', $id)->first(),
+                'categories'=>Category::orderBy('name', 'asc')->get()
+            ]);
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -71,7 +98,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_data = $request->validate([
+            'name'=>['required'],
+            'price'=>['required'],
+            'category_id'=>['required'],
+            'description'=>['required'],
+        ]);
+        Product::where('id', $id)->update($product_data);
+        return redirect('/product'); 
     }
 
     /**
@@ -82,6 +116,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (auth()->user()->role == 'admin'){
+            $product=Product::find($id);
+    
+            $product->delete();
+            return back();
+        }else{
+            return back();
+        }
     }
 }

@@ -5,14 +5,6 @@
         data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
         <ul class="menu-nav">
-            <li class="menu-item {{ Request::is('dashboard*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                <a href="/dashboard" class="menu-link">
-                    <span class="svg-icon menu-icon">
-                        <i class="fas fa-home"></i>
-                    </span>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-            </li>
             @if (auth()->user()->role == 'admin')
                 <li class="menu-item {{ Request::is('category*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                     <a href="/category" class="menu-link">
