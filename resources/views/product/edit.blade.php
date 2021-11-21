@@ -7,7 +7,7 @@
             <div class="col-md-5">
                 <h2>Edit Product</h2>
                 <a href="/product" class="btn btn-secondary btn-sm mb-3">Back</a>
-                <form action="/product/{{ $product->id }}" method="POST">
+                <form action="/product/{{ $product->id }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="form-group mb-3">
@@ -34,9 +34,9 @@
                             <option></option>
                             @foreach ($categories as $category)
                                 @if ($product->category_id == $category->id)
-                                <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option selected value="{{ $category->id }}">{{ $category->name }}</option>
                                 @else
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -46,9 +46,21 @@
                             </p>
                         @enderror
                     </div>
+                    <div class="custom-file mb-3">
+                        <label for="" class="form-label">Image</label>
+                        <input type="hidden" name="old_image" value="{{ $product->image }}">
+                        <input type="file" class="custom-file-input" id="customFile" name="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        @error('image')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                     <div class="form-group mb-3">
                         <label for="" class="form-label">Description</label>
-                        <textarea name="description" id="" cols="5" rows="5" class="form-control">{{ $product->description }}</textarea>
+                        <textarea name="description" id="" cols="5" rows="5"
+                            class="form-control">{{ $product->description }}</textarea>
                         @error('description')
                             <p class="text-danger">
                                 {{ $message }}
