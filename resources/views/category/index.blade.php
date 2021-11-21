@@ -4,9 +4,15 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-5">
-                <h2>Category</h2>
-                <a href="/category/create" class="btn btn-primary btn-sm mb-3">Add</a>
+            <div class="col-sm-6">
+                <div class="row justify-content-between">
+                    <div class="col-sm-3">
+                        <h2>Category</h2>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="/category/create" class="btn btn-primary btn-sm mb-3">Add</a>
+                    </div>
+                </div>
                 <table class="table text-center">
                     <thead>
                         <tr>
