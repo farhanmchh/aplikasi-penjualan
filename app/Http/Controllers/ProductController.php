@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -50,8 +51,10 @@ class ProductController extends Controller
             'name'=>['required'],
             'price'=>['required'],
             'category_id'=>['required'],
+            'image'=>['file' , 'max: 1000'],
             'description'=>['required'],
         ]);
+        $product_data['image']=$request->file('image')->store('product_image');
         Product::create($product_data);
         return redirect('/product'); 
     }
@@ -102,8 +105,13 @@ class ProductController extends Controller
             'name'=>['required'],
             'price'=>['required'],
             'category_id'=>['required'],
+            'image'=>['file' , 'max: 1000'],
             'description'=>['required'],
         ]);
+        if($request->old_image) {
+            Storage::delete("/$request->old_image");
+        }
+        $product_data['image']=$request->file('image')->store('product_image');
         Product::where('id', $id)->update($product_data);
         return redirect('/product'); 
     }
@@ -118,7 +126,9 @@ class ProductController extends Controller
     {
         if (auth()->user()->role == 'admin'){
             $product=Product::find($id);
-    
+            if ($product->image) {
+                Storage::delete("/$product->image");
+            }
             $product->delete();
             return back();
         }else{

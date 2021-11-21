@@ -7,7 +7,7 @@
             <div class="col-md-5">
                 <h2>Add Product</h2>
                 <a href="/product" class="btn btn-secondary btn-sm mb-3">Back</a>
-                <form action="/product" method="POST">
+                <form action="/product" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3">
                         <label class="form-label">Product Name</label>
@@ -36,6 +36,16 @@
                             @endforeach
                         </select>
                         @error('category_id')
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+                    <label for="" class="form-label">Image</label>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="customFile" name="image">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        @error('image')
                             <p class="text-danger">
                                 {{ $message }}
                             </p>
