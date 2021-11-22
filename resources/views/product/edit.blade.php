@@ -46,8 +46,8 @@
                             </p>
                         @enderror
                     </div>
+                    <label for="" class="form-label">Image</label>
                     <div class="custom-file mb-3">
-                        <label for="" class="form-label">Image</label>
                         <input type="hidden" name="old_image" value="{{ $product->image }}">
                         <input type="file" class="custom-file-input" id="customFile" name="image">
                         <label class="custom-file-label" for="customFile">Choose file</label>

@@ -15,7 +15,7 @@
             @foreach ($products as $product)
                 <div class="col-md-3">
                     <div class="card mb-6">
-                        <div class="position-absolute px-4 py-1 rounded-end text-white text-center"
+                        <div class="position-absolute px-4 py-1 rounded-end text-white text-center rounded-right"
                             style="background-color: rgba(0, 0, 0, 0.7);">{{ $product->category->name }}</div>
                         @if ($product->image)
                             <img src="{{ asset("storage/$product->image") }}" alt="" class="card-img-top">

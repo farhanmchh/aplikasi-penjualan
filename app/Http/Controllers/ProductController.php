@@ -19,7 +19,7 @@ class ProductController extends Controller
         return view('product.index', [
             'title' => 'Product', 
             'products'=> Product::all()
-          ]);
+        ]);
     }
 
     /**
@@ -54,7 +54,10 @@ class ProductController extends Controller
             'image'=>['file' , 'max: 1000'],
             'description'=>['required'],
         ]);
-        $product_data['image']=$request->file('image')->store('product_image');
+
+        if ($request->file('image')) {
+            $product_data['image']=$request->file('image')->store('product_image');
+        }
         Product::create($product_data);
         return redirect('/product'); 
     }
@@ -110,8 +113,10 @@ class ProductController extends Controller
         ]);
         if($request->old_image) {
             Storage::delete("/$request->old_image");
+            $product_data['image']=$request->file('image')->store('product_image');
+        } else if ($request->file('image')) {
+            $product_data['image']=$request->file('image')->store('product_image');
         }
-        $product_data['image']=$request->file('image')->store('product_image');
         Product::where('id', $id)->update($product_data);
         return redirect('/product'); 
     }
