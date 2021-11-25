@@ -5,7 +5,7 @@
         data-menu-dropdown-timeout="500">
         <!--begin::Menu Nav-->
         <ul class="menu-nav">
-            @if (auth()->user()->role == 'admin')
+            @if (auth()->user())
                 <li class="menu-item {{ Request::is('category*') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                     <a href="/category" class="menu-link">
                         <span class="svg-icon menu-icon">
