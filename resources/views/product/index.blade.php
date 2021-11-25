@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm">
                 <h2>Product</h2>
-                @if (auth()->user()->role == 'admin')
+                @if (auth()->user())
                     <a href="/product/create" class="btn btn-primary btn-sm mb-3">Add</a>
                 @endif
             </div>
@@ -28,7 +28,7 @@
                             <h6 class="card-subtitle mb-2 text-muted">{{ $product->price }}</h6>
                             <p class="card-text">{{ Str::limit($product->description, 50) }}</p>
                             <a href="/product/{{ $product->id }}" class="btn btn-primary btn-sm">Detail</a>
-                            @if (auth()->user()->role == 'admin')
+                            @if (auth()->user())
                                 <a href="/product/{{ $product->id }}/edit" class="btn btn-success btn-sm">Edit</a>
                                 <form class="d-inline" action="/product/{{ $product->id }}" method="POST">
                                     @method('delete')

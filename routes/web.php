@@ -19,10 +19,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [AuthController::class, 'index'])->middleware('guest')->name('login');
+Route::get('/', [ProductController::class, 'index'])->middleware('guest');
+Route::get('/sign_in', [AuthController::class, 'index'])->middleware('guest');
 Route::get('/sign_up', [AuthController::class, 'sign_up'])->middleware('guest');
 Route::post('/registration', [AuthController::class, 'registration'])->middleware('guest');
 Route::post('/', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::resource('category', CategoryController::class)->middleware('auth');
-Route::resource('product', ProductController::class)->middleware('auth');
+Route::resource('product', ProductController::class);

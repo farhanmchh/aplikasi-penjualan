@@ -17,10 +17,10 @@
 		<div class="d-flex flex-column flex-root">
 			<div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
 				<div class="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
-					<div class="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10">
+					{{-- <div class="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10">
 						<span class="font-weight-bold text-dark-50">Dont have an account yet?</span>
 						<a href="/sign_up" class="font-weight-bold ml-2" id="kt_login_signup">Sign Up!</a>
-					</div>
+					</div> --}}
 					<div class="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
 						<div class="login-form login-signin">
 							<div class="text-center mb-10 mb-lg-20">
