@@ -93,7 +93,7 @@
         <!--begin::Page-->
         <div class="d-flex flex-row flex-column-fluid page">
             <!--begin::Aside-->
-            @if (auth()->user())
+            @auth
                 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
@@ -128,7 +128,7 @@
                     <!--end::Brand-->
                     @include('layout.menu')
                 </div>
-            @endif
+            @endauth
             <!--end::Aside-->
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid {{ auth()->user() ? 'wrapper' : '' }}" id="kt_wrapper">
