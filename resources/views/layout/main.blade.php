@@ -139,7 +139,7 @@
                         <!--begin::Topbar-->
                         <div class="topbar">
                             <div class="topbar-item">
-                                <h3>KATALOG</h3>
+                                <h3>KATALOG PENJUALAN</h3>
                             </div>
                         </div>
                         <div class="topbar">
